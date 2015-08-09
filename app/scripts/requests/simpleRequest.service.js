@@ -32,6 +32,8 @@
             floor = -1;
         };
 
+        self.clearAll = self.clearFloor;
+
         self.getCalledFloors = function () {
             return [floor];
         };

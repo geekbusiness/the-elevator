@@ -52,12 +52,13 @@
                 this.open = false;
             },
             stop: function () {
-                this.dir = 0;
+                this.isUserStopped = true;
             },
             dir: 0,
             floor: 10,
             open: false,
-            occupied: false
+            occupied: false,
+            isUserStopped: false
         };
 
         // Object representing the control panel in the car
@@ -152,7 +153,24 @@
                 // Destination floor, outer door opened automatically
                 // User only have to operate inner door
                 floors[nextFloor].openOuterDoor();
+
+                // Clear current floor in called floor array
                 userRequest.clearFloor(nextFloor);
+
+                return;
+            }
+            if(car.isUserStopped) {
+                // Car is stopped
+                car.dir = 0;
+
+                // Outer door is opened
+                floors[car.floor].openOuterDoor();
+
+                // Remove emergency stop flag
+                car.isUserStopped = false;
+
+                // Clear all other called floors
+                userRequest.clearAll();
                 return;
             }
             // If car is moving, inner door is open and car is occupied then car must stop

@@ -33,6 +33,10 @@
             });
         };
 
+        self.clearAll = function() {
+            floors = [];
+        };
+
         self.getCalledFloors = function () {
             return floors;
         };
