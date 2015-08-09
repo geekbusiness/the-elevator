@@ -7,6 +7,10 @@
      * @description
      * Enhanced user panel request service
      * Multiple requests handling
+     *
+     * angular
+     *     .module('theElevator')
+     *     .controller('ElevatorCtrl', ['$scope', '$interval', 'floorLight', 'simpleRequest', elevatorController]);
      **/
     angular
         .module('theElevator')

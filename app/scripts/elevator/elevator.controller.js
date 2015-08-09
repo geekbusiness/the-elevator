@@ -9,6 +9,12 @@
      * @requires  floorLight
      * @description
      * Elevator controller
+     *
+     * There are 2 services handling user requests: simpleRequest and enhancedRequest
+     * simpleRequest: One request at a time
+     * enhancedRequest: Multiple requests handling
+     *
+     * simpleRequest and enhancedRequest can be switched in controller declation
      */
     angular
         .module('theElevator')

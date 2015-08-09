@@ -7,6 +7,10 @@
      * @description
      * Simple user panel request service
      * One request at a time
+     *
+     * angular
+     *     .module('theElevator')
+     *     .controller('ElevatorCtrl', ['$scope', '$interval', 'floorLight', 'simpleRequest', elevatorController]);
      **/
     angular
         .module('theElevator')
