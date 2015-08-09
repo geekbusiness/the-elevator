@@ -4,7 +4,9 @@
     /**
      * @ngdoc object
      * @name theElevator.ElevatorCtrl
-     * @requires  $scope $interval floorLight
+     * @requires  $scope
+     * @requires  $interval
+     * @requires  floorLight
      * @description
      * Elevator controller
      */
