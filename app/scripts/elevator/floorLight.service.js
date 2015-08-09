@@ -1,6 +1,12 @@
 (function () {
     'use strict';
 
+    /**
+     * @ngdoc service
+     * @name theElevator.floorLight
+     * @description
+     * Floor lighs switching service
+     **/
     angular
         .module('theElevator')
         .service('floorLight', floorLightService);

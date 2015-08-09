@@ -2,12 +2,11 @@
     'use strict';
 
     /**
-     * @ngdoc overview
-     * @name theElevator
+     * @ngdoc object
+     * @name theElevator.ElevatorCtrl
+     * @requires  $scope $interval floorLight
      * @description
-     * # theElevator
-     *
-     * Main module of the application.
+     * Elevator controller
      */
     angular
         .module('theElevator')
