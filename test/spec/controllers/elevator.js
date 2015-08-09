@@ -1,5 +1,4 @@
 'use strict';
-/*jshint nomen: true */
 // jscs:disable disallowDanglingUnderscores
 describe('Controller: ElevatorCtrl', function () {
 
