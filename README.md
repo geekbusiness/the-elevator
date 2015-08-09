@@ -1,11 +1,12 @@
-# angu
+# the-elevator
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.12.1.
+## Init
+
+run `npm install`
 
 ## Build & development
 
-Run `grunt` for building and `grunt serve` for preview.
+Run `grunt serve` for preview and `grunt` for building.
 
 ## Testing
 
