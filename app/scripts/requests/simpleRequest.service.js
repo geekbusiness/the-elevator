@@ -17,7 +17,7 @@
             floor = -1;
 
         self.callFloor = function (car, calledFloor) {
-            if(car.dir!==0)  {
+            if (car.dir !== 0) {
                 // If car is moving, user can't call another floor
                 return;
             }

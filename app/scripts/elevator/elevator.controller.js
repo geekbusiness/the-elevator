@@ -73,7 +73,7 @@
                 // then we go to selected floor
                 car.call(n);
             },
-            isFloorButtonEnabled: function (n) {
+            isFloorButtonEnabled: function () {
                 // Panel buttons enabled if car is occupied and car door closed
                 return (car.occupied && !car.open);
             },
