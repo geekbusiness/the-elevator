@@ -19,12 +19,12 @@
 
         return directive;
 
-        function outerUserPanelLinkFunc(scope, element, attrs) {
-            scope.stepIn = function() {
+        function outerUserPanelLinkFunc(scope) {
+            scope.stepIn = function () {
 
             };
 
-            scope.stepOut = function() {
+            scope.stepOut = function () {
 
             };
         }

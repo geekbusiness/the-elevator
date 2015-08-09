@@ -15,7 +15,7 @@
                 return;
             }
             // If car is available to call, switch all lights off
-            if(car.dir===0) {
+            if (car.dir === 0) {
                 setAllLightsOff(floors);
                 return;
             }
@@ -23,8 +23,7 @@
             floors.forEach(function (floor) {
                 if (car.calledFloor === floor.n && car.dir !== 0) {
                     setGreenLight(floor);
-                }
-                else {
+                } else {
                     setRedLight(floor);
                 }
             });
@@ -42,11 +41,11 @@
             setFloorLightColor(floor, 'green');
         };
 
-        var setAllLightsOff = function(floors) {
+        var setAllLightsOff = function (floors) {
             floors.forEach(setLightOff);
         };
 
-        var setLightOff = function(floor) {
+        var setLightOff = function (floor) {
             setFloorLightColor(floor, null);
         };
 

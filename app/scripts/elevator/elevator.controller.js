@@ -49,7 +49,7 @@
             canOpen: function () {
                 return (!this.open && (this.occupied || !this.occupied && floors[this.floor].open));
             },
-            canClose: function (n) {
+            canClose: function () {
                 return (this.open && floors[this.floor].open);
             },
             openInnerDoor: function () {
@@ -70,7 +70,7 @@
 
         // Object representing the control panel in the car
         $scope.panel = {
-            btnClass: function (n) {
+            btnClass: function () {
                 // This can be used to emulate a LED light near or inside the button
                 // to give feedback to the user.
                 return null;
@@ -87,16 +87,20 @@
             stop: function () {
                 car.stop();
             },
-            isStopButtonEnabled: function(n) {
+            isStopButtonEnabled: function () {
                 return (car.occupied && !car.open);
             }
         };
 
         $scope.user = {
             stepInButtonEnabled: function () {
-                return (!car.occupied && car.dir===0 && car.open)
+                // User can only step in car if car is
+                // empty, immobile and if inner door is open
+                return (!car.occupied && car.dir === 0 && car.open);
             },
             stepOutButtonEnabled: function () {
+                // User can step out car if car is occupied
+                // and inner door is open
                 return (car.occupied && car.open);
             },
             stepIn: function () {
@@ -124,16 +128,13 @@
                 return (this.open ? 'OPEN' : 'CLOSED');
             };
             floor.openOuterDoor = function () {
-                if (!this.canOpenOuterDoor()) {
-                    return;
-                }
                 this.open = true;
             };
             floor.closeOuterDoor = function () {
                 this.open = false;
             };
             floor.isCallButtonEnabled = function () {
-                return (!car.occupied && car.dir===0);
+                return (!car.occupied && car.dir === 0);
             };
             floor.canOpenOuterDoor = function () {
                 return (this.n === car.floor && car.dir === 0 && !this.open);
@@ -144,17 +145,22 @@
             if (car.calledFloor < 0) {
                 return;
             }
+            // Floor light color setting
             floorLight.set(car, floors);
             if (car.calledFloor === car.floor) {
-                //
                 car.dir = 0;
-                //floors[car.calledFloor].openOuterDoor();
+                // Destination floor, outer door opened automatically
+                // User only have to operate inner door
+                floors[car.calledFloor].openOuterDoor();
                 return;
             }
+            // If car is moving, inner door is open and car is occupied
+            // car must stop
             if (car.open && car.occupied) {
                 car.stop();
                 return;
             }
+            // Car is moving
             car.floor = car.floor + car.dir;
         }, 1000);
     }
