@@ -2,6 +2,9 @@
 
 ## Init
 
+If grunt is not installed:
+run `npm install -g grunt-cli`
+
 run `npm install`
 
 ## Build & development
