@@ -5,7 +5,7 @@
      * @ngdoc service
      * @name theElevator.floorLight
      * @description
-     * Floor lighs switching service
+     * Floor lights switching service
      **/
     angular
         .module('theElevator')
