@@ -10,9 +10,9 @@
      */
     angular
         .module('theElevator')
-        .controller('ElevatorCtrl', ['$scope', '$interval', 'floorLight', elevatorController]);
+        .controller('ElevatorCtrl', ['$scope', '$interval', 'floorLight', 'simpleRequest', elevatorController]);
 
-    function elevatorController($scope, $interval, floorLight) {
+    function elevatorController($scope, $interval, floorLight, userRequest) {
         // Object representing the car
         var car = $scope.car = {
             active: function (n) {
@@ -36,13 +36,7 @@
                 return (this.open ? 'OPEN' : 'CLOSED');
             },
             call: function (n) {
-                if (n < this.floor) {
-                    this.dir = -1;
-                }
-                if (n > this.floor) {
-                    this.dir = 1;
-                }
-                this.calledFloor = n;
+                userRequest.callFloor(this, n);
                 floors[this.floor].closeOuterDoor();
             },
             canOpen: function () {
@@ -62,7 +56,6 @@
             },
             dir: 0,
             floor: 10,
-            calledFloor: -1,
             open: false,
             occupied: false
         };
@@ -81,7 +74,8 @@
                 car.call(n);
             },
             isFloorButtonEnabled: function (n) {
-                return (car.occupied && car.floor !== n && !car.open);
+                // Panel buttons enabled if car is occupied and car door closed
+                return (car.occupied && !car.open);
             },
             stop: function () {
                 car.stop();
@@ -141,26 +135,39 @@
         });
 
         $interval(function () {
-            if (car.calledFloor < 0) {
+            var nextFloor = userRequest.getCalledFloor();
+            if (nextFloor < 0) {
                 return;
             }
-            // Floor light color setting
-            floorLight.set(car, floors);
-            if (car.calledFloor === car.floor) {
+            setCarDirection(nextFloor);
+
+            // Floor light color switching
+            floorLight.set(car, floors, nextFloor);
+
+            // If car is at the right floor
+            if (nextFloor === car.floor) {
                 car.dir = 0;
                 // Destination floor, outer door opened automatically
                 // User only have to operate inner door
-                floors[car.calledFloor].openOuterDoor();
+                floors[nextFloor].openOuterDoor();
                 return;
             }
-            // If car is moving, inner door is open and car is occupied
-            // car must stop
+            // If car is moving, inner door is open and car is occupied then car must stop
             if (car.open && car.occupied) {
                 car.stop();
                 return;
             }
-            // Car is moving
+            // Everything seems ok, car is moving
             car.floor = car.floor + car.dir;
         }, 1000);
+
+        var setCarDirection = function (nextFloor) {
+            if (nextFloor < car.floor) {
+                car.dir = -1;
+            }
+            if (nextFloor > car.floor) {
+                car.dir = 1;
+            }
+        };
     }
 })();

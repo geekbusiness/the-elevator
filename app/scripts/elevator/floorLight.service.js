@@ -14,7 +14,7 @@
     function floorLightService() {
         var self = this;
 
-        self.set = function (car, floors) {
+        self.set = function (car, floors, nextFloor) {
             // If car is occupied, set all lights red
             if (car.occupied) {
                 setAllFloorsRedLight(floors);
@@ -27,7 +27,7 @@
             }
             // If car is moving, set destination floor green light
             floors.forEach(function (floor) {
-                if (car.calledFloor === floor.n && car.dir !== 0) {
+                if (nextFloor === floor.n && car.dir !== 0) {
                     setGreenLight(floor);
                 } else {
                     setRedLight(floor);

@@ -30,18 +30,19 @@ describe('Controller: ElevatorCtrl', function () {
     });
 
     it('should set green light in called floor', function () {
-        scope.car.calledFloor = 2;
+        var calledFloor = 2;
         scope.car.dir = -1;
 
-        floorLight.set(scope.car, scope.floors);
+        floorLight.set(scope.car, scope.floors, calledFloor);
 
-        expect(scope.floors[scope.car.calledFloor].light).toBe('green');
+        expect(scope.floors[calledFloor].light).toBe('green');
     });
 
     it('should set red all lights', function () {
+        var calledFloor = 6;
         scope.car.occupied = true;
 
-        floorLight.set(scope.car, scope.floors);
+        floorLight.set(scope.car, scope.floors, calledFloor);
 
         scope.floors.forEach(function (floor) {
             expect(floor.light).toBe('red');
