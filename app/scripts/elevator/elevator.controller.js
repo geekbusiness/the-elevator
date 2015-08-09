@@ -159,7 +159,7 @@
 
                 return;
             }
-            if(car.isUserStopped) {
+            if (car.isUserStopped) {
                 // Car is stopped
                 car.dir = 0;
 

@@ -33,7 +33,7 @@
             });
         };
 
-        self.clearAll = function() {
+        self.clearAll = function () {
             floors = [];
         };
 
