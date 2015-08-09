@@ -21,10 +21,16 @@
         };
 
         self.getCalledFloor = function () {
-            if (floors.length > 1) {
-                return floors.shift();
+            if (floors.length > 0) {
+                return floors[0];
             }
             return -1;
+        };
+
+        self.clearFloor = function (floorToClear) {
+            _.remove(floors, function (floor) {
+                return (floor === floorToClear);
+            });
         };
 
         self.getCalledFloors = function () {

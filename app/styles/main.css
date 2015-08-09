@@ -80,9 +80,9 @@ button[disabled] {
 }
 
 td.red {
-    color: blue;
+    color: darkred;
 }
 
 td.green {
-    color: yellow;
+    color: greenyellow;
 }

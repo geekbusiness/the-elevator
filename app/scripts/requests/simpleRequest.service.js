@@ -28,6 +28,10 @@
             return floor;
         };
 
+        self.clearFloor = function () {
+            floor = -1;
+        };
+
         self.getCalledFloors = function () {
             return [floor];
         };

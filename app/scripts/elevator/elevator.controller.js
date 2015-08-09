@@ -84,7 +84,9 @@
                 return (car.occupied && !car.open);
             }
         };
+        $scope.calledFloors = userRequest.getCalledFloors;
 
+        // User actions
         $scope.user = {
             stepInButtonEnabled: function () {
                 // User can only step in car if car is
@@ -150,6 +152,7 @@
                 // Destination floor, outer door opened automatically
                 // User only have to operate inner door
                 floors[nextFloor].openOuterDoor();
+                userRequest.clearFloor(nextFloor);
                 return;
             }
             // If car is moving, inner door is open and car is occupied then car must stop
@@ -157,7 +160,10 @@
                 car.stop();
                 return;
             }
-            // Everything seems ok, car is moving
+            // Everything seems ok
+            // We close outer door
+            floors[car.floor].closeOuterDoor();
+            // Car is moving
             car.floor = car.floor + car.dir;
         }, 1000);
 
